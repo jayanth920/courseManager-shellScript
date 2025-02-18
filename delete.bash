@@ -23,7 +23,7 @@ if [ -f "$filename" ]; then
     rm "$filename"
 
     # Log the deletion after removing the file
-    echo "$(date) DELETED: $dept_code $course_num $course_name" >> data/queries.log
+    echo "$(date +"%Y-%m-%d %H:%M:%S") DELETED: $dept_code $course_num $course_name" >> data/queries.log
 
     # Inform the user
     echo "Course $course_num was successfully deleted."
