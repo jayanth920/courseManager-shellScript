@@ -28,17 +28,17 @@ read -r course_hours
 echo "Enter initial course enrollment (unsigned integer):"
 read -r course_size
 
-# Convert department code to uppercase
-dept_code=${dept_code^^}
+# Convert department code to uppercase (works in Bash 3)
+dept_code=$(echo "$dept_code" | tr 'a-z' 'A-Z')
 
 # Construct filename for the course
 filename="data/${dept_code}${course_num}.crs"
 
 # Check if the course file already exists after collecting all inputs
 if [ -f "$filename" ]; then
-        echo "ERROR: course already exists"
-            exit 1
-            fi
+    echo "ERROR: course already exists"
+    exit 1
+fi
 
 # Create the new course file and write the details to it
 echo "$dept_code $dept_name" > "$filename"
@@ -51,4 +51,3 @@ echo "$course_size" >> "$filename"
 echo "$(date +"%Y-%m-%d %H:%M:%S") CREATED: $dept_code $course_num $course_name" >> data/queries.log
 
 echo "Course created successfully!"
-
